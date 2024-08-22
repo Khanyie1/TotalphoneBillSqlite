@@ -1,0 +1,39 @@
+### To get price plans
+GET http://localhost:3013/api/khanyie/price_plans/
+
+### To Insert the counter values
+POST http://localhost:3013/api/khanyie/price_plan/create/
+content-type: application/json
+
+{
+    "place_name": "Khanyie",
+    "sms_price": 2.75,
+    "call_price": 2
+}
+
+### To Update 
+POST http://localhost:3013/api/khanyie/price_plan/update/
+Content-Type: application/json
+
+{
+    "place_name": "sotobe",
+    "sms_price": 4,
+    "call_price": 3
+}
+
+### TO remove item
+POST http://localhost:3013/api/khanyie/price_plan/delete/
+content-type: application/json
+
+{
+    
+}
+
+### Calculating the total phone bii
+POST http://localhost:3013/api/khanyie/price_plan/calculatePhoneBill/
+content-type: application/json
+
+{
+    "price_plan": "sms_kick_100",
+    "actions": "call, sms, call"
+}

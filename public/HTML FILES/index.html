@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Plans</title>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body x-data="PricePlanSQL">
+<div class="container">
+    <h1>Price Plans Management</h1>
+    <div>
+        <h2>Create Price Plan</h2>
+        <form @submit.prevent="createPricePlan">
+            <div class="form-group">
+                <label for="name">Plan Name</label>
+                <input type="text" id="name" x-model="newPlan.name" required>
+            </div>
+            <div class="form-group">
+                <label for="call_cost">Call Cost</label>
+                <input type="number" id="call_cost" x-model="newPlan.call_cost" required>
+            </div>
+            <div class="form-group">
+                <label for="sms_cost">SMS Cost</label>
+                <input type="number" id="sms_cost" x-model="newPlan.sms_cost" required>
+            </div>
+            <button type="submit">Create Price Plan</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Update Price Plan</h2>
+        <form @submit.prevent="updatePricePlan">
+            <div class="form-group">
+                <label for="update_id">Plan ID</label>
+                <input type="number" id="update_id" x-model="updatePlan.id" required>
+            </div>
+            <div class="form-group">
+                <label for="update_name">Plan Name</label>
+                <input type="text" id="update_name" x-model="updatePlan.name" required>
+            </div>
+            <div class="form-group">
+                <label for="update_call_cost">Call Cost</label>
+                <input type="number" id="update_call_cost" x-model="updatePlan.call_cost" required>
+            </div>
+            <div class="form-group">
+                <label for="update_sms_cost">SMS Cost</label>
+                <input type="number" id="update_sms_cost" x-model="updatePlan.sms_cost" required>
+            </div>
+            <button type="submit">Update Price Plan</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Calculate Phone Bill</h2>
+        <form @submit.prevent="calculatePhoneBill">
+            <div class="form-group">
+                <label for="calc_plan">Plan Name</label>
+                <input type="text" id="calc_plan" x-model="calcData.price_plan" required>
+            </div>
+            <div class="form-group">
+                <label for="actions">Actions (comma separated)</label>
+                <input type="text" id="actions" x-model="calcData.actions" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div x-show="calculatedTotal !== null">
+            <h3>Total Bill: <span x-text="calculatedTotal"></span></h3>
+        </div>
+    </div>
+
+    <div>
+        <h2>Delete Price Plan</h2>
+        <form @submit.prevent="deletePricePlan">
+            <div class="form-group">
+                <label for="delete_id">Plan ID</label>
+                <input type="number" id="delete_id" x-model="deletePlan.id" required>
+            </div>
+            <button type="submit">Delete Price Plan</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Price Plans</h2>
+        <button @click="fetchPricePlans">Load Price Plans</button>
+        <ul>
+            <template x-for="plan in pricePlans">
+                <li>
+                    <strong>Plan Id :<span x-text="plan.id"></span></strong>
+                    <strong>, <span x-text="plan.plan_name"></span></strong> : Call: R<span x-text="plan.call_price"></span>, SMS: R<span x-text="plan.sms_price"></span>
+                </li>
+            </template>
+        </ul>
+    </div>
+</div>
+</body>
