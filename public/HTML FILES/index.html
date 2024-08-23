@@ -90,7 +90,9 @@
             <template x-for="plan in pricePlans">
                 <li>
                     <strong>Plan Id :<span x-text="plan.id"></span></strong>
-                    <strong>, <span x-text="plan.plan_name"></span></strong> : Call: R<span x-text="plan.call_price"></span>, SMS: R<span x-text="plan.sms_price"></span>
+                    <strong>, <span x-text="plan.plan_name"></span></strong> 
+                    : Call: R<span x-text="plan.call_price"></span>, 
+                    SMS: R<span x-text="plan.sms_price"></span>
                 </li>
             </template>
         </ul>
