@@ -5,7 +5,7 @@ import cors from 'cors'
 
 const app = express()
 app.use(cors())
-app.use(express.static('public'))
+app.use(express.static('public/HTML FILES'))
 app.use(express.json())
 
 app.get('/api/khanyie/price_plans/', async function(req, res){
