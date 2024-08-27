@@ -7,14 +7,25 @@ document.addEventListener('alpine:init', () => {
             deletePlan: { id: '' },
             pricePlans: [],
             calculatedTotal: '',
+            showPlans: false,
     
             async fetchPricePlans() {
                 try {
                     const response = await axios.get('http://localhost:3013/api/khanyie/price_plans/');
                     this.pricePlans = response.data;
-                    setTimeout(() => {this.pricePlans = [] }, 10000)
+                    this.showPlans = true;
+                    setTimeout(() => {this.pricePlans = [] }, 90000)
                 } catch (error) {
                     console.error('Error fetching price plans:', error);
+                }
+            },
+
+            togglePricePlans() {
+                if (this.showPlans) {
+                    this.pricePlans = [];
+                    this.showPlans = false;
+                } else {
+                    this.fetchPricePlans();
                 }
             },
     
@@ -25,6 +36,7 @@ document.addEventListener('alpine:init', () => {
                     this.fetchPricePlans();
                 } catch (error) {
                     console.error('Error creating price plan:', error);
+                    alert("Price plan name already exists");
                 }
             },
     

@@ -16,9 +16,20 @@ app.get('/api/khanyie/price_plans/', async function(req, res){
 app.post('/api/khanyie/price_plan/create/', async function(req, res){
     const { name, call_cost, sms_cost } = req.body;
 
-    await db.run("INSERT INTO price_plan (plan_name, call_price, sms_price) VALUES (?, ?, ?)", name, call_cost, sms_cost);
+    try{
+        const existingPlan = await db.get("SELECT * FROM price_plan WHERE plan_name = ?", [name]);
+        if (existingPlan){
+            return res.status(400).json({ message: 'Price plan name already exists' });
 
-    res.status(200).json({ message: 'Price plan created successfully' });
+        } else {
+            await db.run("INSERT INTO price_plan (plan_name, call_price, sms_price) VALUES (?, ?, ?)", name, call_cost, sms_cost);
+        }
+
+        res.status(200).json({ message: 'Price plan created successfully' });
+
+    } catch {
+        return res.status(420).json({message: "Application failed to execute the function to insert the values!"})
+    }
 })
 
 app.post('/api/khanyie/price_plan/update/', async function(req, res){

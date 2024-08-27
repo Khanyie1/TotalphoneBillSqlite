@@ -85,17 +85,19 @@
 
     <div>
         <h2>Price Plans</h2>
-        <button @click="fetchPricePlans">Load Price Plans</button>
-        <ul>
-            <template x-for="plan in pricePlans">
-                <li>
-                    <strong>Plan Id :<span x-text="plan.id"></span></strong>
-                    <strong>, <span x-text="plan.plan_name"></span></strong> 
-                    : Call: R<span x-text="plan.call_price"></span>, 
-                    SMS: R<span x-text="plan.sms_price"></span>
-                </li>
-            </template>
-        </ul>
+        <button @click="togglePricePlans">Load Price Plans</button>
+        <div x-show="showPlans" style="max-height: 200px; overflow-y: auto;">
+            <ul>
+                <template x-for="plan in pricePlans">
+                    <li>
+                        <strong>Plan Id :<span x-text="plan.id"></span></strong>
+                        <strong>, <span x-text="plan.plan_name"></span></strong> 
+                        : Call: R<span x-text="plan.call_price"></span>, 
+                        SMS: R<span x-text="plan.sms_price"></span>
+                    </li>
+                </template>
+            </ul>
+        </div>
     </div>
 </div>
 </body>
