@@ -34,6 +34,7 @@ document.addEventListener('alpine:init', () => {
                     await axios.post('http://localhost:3013/api/khanyie/price_plan/create/', this.newPlan);
                     alert('Price plan created successfully');
                     this.fetchPricePlans();
+                    this.newPlan = [];
                 } catch (error) {
                     console.error('Error creating price plan:', error);
                     alert("Price plan name already exists");
