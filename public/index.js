@@ -55,10 +55,11 @@ document.addEventListener('alpine:init', () => {
                     const response = await axios.post('http://localhost:3013/api/khanyie/price_plan/calculatePhoneBill/', this.calcData);
                     this.calculatedTotal = response.data.total;
                     setTimeout(() => {
-                        this.calculatedTotal = null;
+                        this.calculatedTotal = '';
                     }, 5000)
                 } catch (error) {
                     console.error('Error calculating phone bill:', error);
+                    alert("Invalid plan name, sorry.")
                 }
             },
     

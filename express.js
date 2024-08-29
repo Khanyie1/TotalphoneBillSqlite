@@ -52,7 +52,7 @@ app.post('/api/khanyie/price_plan/calculatePhoneBill/', async function(req, res)
     const plan_name_variable = '?'
     const plan = await db.get(`SELECT * FROM price_plan WHERE plan_name = ${plan_name_variable}`, price_plan);
     if (!plan) {
-        return res.status(404).json({ error: 'Price plan not found' });
+        return res.status(404).json({ error: 'Price plan name not found' });
     }
 
     const actionList = actions.split(",");
