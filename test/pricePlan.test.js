@@ -55,15 +55,26 @@ describe('Price Plan API', function() {
     });
 
     describe('POST /api/khanyie/price_plan/delete/', function() {
+        // it('should delete an existing price plan', async function() {
+        //     await request.post('/api/khanyie/price_plan/create/')
+        //         .send({ name: 'Plan To Delete', call_cost: 1.0, sms_cost: 0.1 });
+
+        //     const res = await request.post('/api/khanyie/price_plan/delete/')
+        //         .send({ id: 25 });
+        //     assert.Equal(res.status, 200);
+        //     assert.Equal(res.body.message, 'Price plan deleted successfully');
+        // });
+
         it('should delete an existing price plan', async function() {
             await request.post('/api/khanyie/price_plan/create/')
                 .send({ name: 'Plan To Delete', call_cost: 1.0, sms_cost: 0.1 });
-
+            
             const res = await request.post('/api/khanyie/price_plan/delete/')
                 .send({ id: 25 });
-            assert.Equal(res.status, 200);
-            assert.Equal(res.body.message, 'Price plan deleted successfully');
+            assert.strictEqual(res.status, 200);
+            assert.strictEqual(res.body.message, 'Price plan deleted successfully');
         });
+
 
         it('should return 404 if the price plan does not exist', async function() {
             const res = await request.post('/api/khanyie/price_plan/delete/')
