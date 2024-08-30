@@ -5,7 +5,7 @@ import { app } from '../express.js';
 const request = supertest(app);
 
 describe('Price Plan API', function() {
-    describe('GET /api/khanyie/price_plans/', function() {
+    describe('Function to get all price plans: ', function() {
         it('should get all price plans', async function() {
             const res = await request.get('/api/khanyie/price_plans/');
             assert.strictEqual(res.status, 200);
@@ -13,7 +13,7 @@ describe('Price Plan API', function() {
         });
     });
 
-    describe('POST /api/khanyie/price_plan/create/', function() {
+    describe('Function to create a new price plan: ', function() {
         it('should create a new price plan', async function() {
             const res = await request.post('/api/khanyie/price_plan/create/')
                 .send({ name: 'Planss A', call_cost: 2.5, sms_cost: 0.5 });
@@ -29,7 +29,7 @@ describe('Price Plan API', function() {
         });
     });
 
-    describe('POST /api/khanyie/price_plan/update/', function() {
+    describe('Function to update the price plan: ', function() {
         it('should update an existing price plan', async function() {
             const res = await request.post('/api/khanyie/price_plan/update/')
                 .send({ id: 1, name: 'Updated Plan', call_cost: 3.0, sms_cost: 0.6 });
@@ -38,7 +38,7 @@ describe('Price Plan API', function() {
         });
     });
 
-    describe('POST /api/khanyie/price_plan/calculatePhoneBill/', function() {
+    describe('Function to calculate the price plan bills: ', function() {
         it('should calculate the total phone bill for a price plan', async function() {
             const res = await request.post('/api/khanyie/price_plan/calculatePhoneBill/')
                 .send({ price_plan: 'Plan A', actions: 'sms,call,sms' });
@@ -54,13 +54,13 @@ describe('Price Plan API', function() {
         });
     });
 
-    describe('POST /api/khanyie/price_plan/delete/', function() {
+    describe('Function to delete the price plan: ', function() {
         it('should delete an existing price plan', async function() {
             await request.post('/api/khanyie/price_plan/create/')
-                .send({ name: 'Plan To Delete', call_cost: 1.0, sms_cost: 0.1 });
+                .send({ name: `Plan To Delete`, call_cost: 1.0, sms_cost: 0.1 });
 
             const res = await request.post('/api/khanyie/price_plan/delete/')
-                .send({ id: 25 });
+                .send({ id: 26 });
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.message, 'Price plan deleted successfully');
         });
