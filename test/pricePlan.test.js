@@ -16,7 +16,7 @@ describe('Price Plan API', function() {
     describe('Function to create a new price plan: ', function() {
         it('should create a new price plan', async function() {
             const res = await request.post('/api/khanyie/price_plan/create/')
-                .send({ name: 'Planss A', call_cost: 2.5, sms_cost: 0.5 });
+                .send({ name: 'Planss Aa', call_cost: 2.5, sms_cost: 0.5 });
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.message, 'Price plan created successfully');
         });
@@ -56,14 +56,12 @@ describe('Price Plan API', function() {
 
     describe('Function to delete the price plan: ', function() {
         it('should delete an existing price plan', async function() {
-            await request.post('/api/khanyie/price_plan/create/')
-                .send({ name: `Plan To Delete`, call_cost: 1.0, sms_cost: 0.1 });
-
             const res = await request.post('/api/khanyie/price_plan/delete/')
                 .send({ id: 26 });
             assert.strictEqual(res.status, 200);
             assert.strictEqual(res.body.message, 'Price plan deleted successfully');
         });
+
 
         it('should return 404 if the price plan does not exist', async function() {
             const res = await request.post('/api/khanyie/price_plan/delete/')
