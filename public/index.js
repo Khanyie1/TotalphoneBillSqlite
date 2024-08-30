@@ -71,6 +71,7 @@ document.addEventListener('alpine:init', () => {
                     this.fetchPricePlans();
                 } catch (error) {
                     console.error('Error deleting price plan:', error);
+                    alert("Can't find record to delete, verify record ID!")
                 }
             }
         };

@@ -3,7 +3,7 @@ import * as sqlite from 'sqlite';
 import sqlite3 from 'sqlite3';
 import cors from 'cors'
 
-const app = express()
+export const app = express()
 app.use(cors())
 app.use(express.static('public'))
 app.use(express.json())
@@ -69,13 +69,26 @@ app.post('/api/khanyie/price_plan/calculatePhoneBill/', async function(req, res)
     res.json({ total: "R" + total.toFixed(2) });
 })
 
-app.post('/api/khanyie/price_plan/delete/', async function(req, res){
+app.post('/api/khanyie/price_plan/delete/', async function(req, res) {
     const { id } = req.body;
 
-    await db.run(`DELETE FROM price_plan WHERE id = ?`, id);
+    try {
+        if (!id) {
+            return res.status(420).json("Function failed to be executed!");
+        }
 
-    res.json({ message: 'Price plan deleted successfully' });
-})
+        const checkingVariable = await db.get('SELECT * FROM price_plan WHERE id = ?', id);
+
+        if (checkingVariable) {
+            await db.run('DELETE FROM price_plan WHERE id = ?', id);
+            res.json({ message: 'Price plan deleted successfully' });
+        } else {
+            return res.status(404).json("Record not found to be deleted");
+        }
+    } catch {
+        res.status(420).json("Function failed to be executed!");
+    }
+});
 
 const  db = await sqlite.open({
     filename:  './data_plan.db',

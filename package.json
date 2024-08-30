@@ -25,13 +25,19 @@
   "contributors": [],
   "scripts": {
     "dev": "nodemon express.js",
-    "test": ""
+    "test": "mocha"
   },
   "dependencies": {
+    "chai-http": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
+    "supertest": "^7.0.0"
   }
 }
