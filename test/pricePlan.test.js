@@ -61,8 +61,8 @@ describe('Price Plan API', function() {
 
             const res = await request.post('/api/khanyie/price_plan/delete/')
                 .send({ id: 25 });
-            assert.strictEqual(res.status, 200);
-            assert.strictEqual(res.body.message, 'Price plan deleted successfully');
+            assert.Equal(res.status, 200);
+            assert.Equal(res.body.message, 'Price plan deleted successfully');
         });
 
         it('should return 404 if the price plan does not exist', async function() {
